@@ -24,6 +24,7 @@ for (var i = 0; i<nop; i++ ) {
 //
 
 var maintitle = document.getElementById("maintitle");
+var myfooter = document.getElementById("myfooter");
 
 // tcs is the array of cells in main table
 var tcs = Array(dim);
@@ -53,13 +54,23 @@ function refreshkeys(colorkeys) {	// i. e. colorkeys = '#cc0';
 }
 
 // To be done - moving pieces
-function movepics(keyno, direct) {
-
-
+function movepics(num, direct) {	// num is the key - 1 (so 0 is for the key 1)
+	var whichtcs = tcs[poskeyy[num]][poskeyx[num]];
+	if(direct) {	
+		whichtcs.style.backgroundColor = "#88f";
+	} else {
+		whichtcs.style.backgroundColor = "#8f8";
+	}
+	myfooter.innerHTML = "shift: " + direct;
 }
 
-function mykeydown(key) {
-	maintitle.innerHTML = String.fromCharCode(key.keyCode);
+function mykeydown(e) {
+	var keycode = e.keyCode;
+	var keychar = String.fromCharCode(keycode);
+	maintitle.innerHTML = "key: " + keychar + " of code: " + keycode;
+	
+	var num = keycode - 49;	// num would be from 0 - 4 (so the key is one value bigger, but this is better for index)
+	if (( num >= 0 && num <= 4))  movepics(num, e.shiftKey);
 }
 //===========================================================
 
