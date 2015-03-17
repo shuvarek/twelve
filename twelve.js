@@ -9,7 +9,35 @@ var poskeyy = [1,3,2,1,3];			// ... and y
 // ...and variables
 var movpcsx = [0, 0, 0, 0];		// temporary array of pieces which are moving (from positions in the movof array )
 
+// array of the pieces (in which column and row they are or the table)
+var posx = new Array(nop);
+var posy = new Array(nop);
+for (var i = 0; i<nop; i++ ) {
+	var n = i * 2 + 1;
+	var rem = n % dim;
+	posx[i] = rem;
+	posy[i] = (n - rem) / dim;
+}
+
+//
+// this values are dependable of the rendered page.
+//
+
+var maintitle = document.getElementById("maintitle");
+
+// tcs is the array of cells in main table
+var tcs = Array(dim);
+for ( i1 = 0; i1 < dim; i1++) {
+	tcs[i1] = Array(dim);
+	for ( i2 = 0; i2 < dim; i2++ ) {
+		tcs[i1][i2] = document.getElementById("tc"+i1+i2);
+	}
+}
+
+
+//
 // funcions
+//
 
 function refreshpieces() {
 	for (var i = 0; i < nop; i++ ) {
@@ -30,27 +58,12 @@ function movepics(keyno, direct) {
 
 }
 
+function mykeydown(key) {
+	maintitle.innerHTML = String.fromCharCode(key.keyCode);
+}
 //===========================================================
 
 
-// array of the pieces (in which column and row they are or the table)
-var posx = new Array(nop);
-var posy = new Array(nop);
-for (var i = 0; i<nop; i++ ) {
-	var n = i * 2 + 1;
-	var rem = n % dim;
-	posx[i] = rem;
-	posy[i] = (n - rem) / dim;
-}
-
-// tcs is the array of cells in main table
-var tcs = Array(dim);
-for ( i1 = 0; i1 < dim; i1++) {
-	tcs[i1] = Array(dim);
-	for ( i2 = 0; i2 < dim; i2++ ) {
-		tcs[i1][i2] = document.getElementById("tc"+i1+i2);
-	}
-}
 
 // show pieces for first time
 refreshpieces();
@@ -58,4 +71,5 @@ refreshpieces();
 // show keys to turn for the first time:
 refreshkeys('#f88');
 
+window.addEventListener("keydown", mykeydown, false);
 		
