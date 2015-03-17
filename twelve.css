@@ -1,0 +1,17 @@
+body {
+	background-color: #eee;
+	text-align: center;
+}
+
+#maintable {
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#maintable td {
+	height: 128px;
+	width:  128px;
+	font-size: 96px;
+}
